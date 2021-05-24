@@ -1,0 +1,40 @@
+{
+	"name": "littler/wechat",
+	"description": "EasyWechat For thnkphp5.1+ or thinkphp6.0",
+	"type": "think-extend",
+	"keywords": [
+		"wechat",
+		"weixin",
+		"easywechat",
+		"thinkphp",
+		"think",
+		"sdk"
+	],
+	"require": {
+		"overtrue/wechat": "~5.0",
+		"php": "~7.4||~8.0",
+		"topthink/framework": "~6.0"
+	},
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "小小只",
+			"email": "littlezo@qq.com"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"littler\\WeChat\\": "src/"
+		}
+	},
+	"extra": {
+		"think": {
+			"services": [
+				"littler\\WeChat\\Service"
+			],
+			"config": {
+				"wechat": "src/config.php"
+			}
+		}
+	}
+}
