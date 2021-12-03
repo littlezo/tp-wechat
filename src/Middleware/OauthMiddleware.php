@@ -6,13 +6,16 @@ declare(strict_types=1);
  * ## 何为相思：不删不聊不打扰，可否具体点：曾爱过。何为遗憾：你来我往皆过客，可否具体点：再无你。.
  *
  * @version 1.0.0
+ *
  * @author @小小只^v^ <littlezov@qq.com>  littlezov@qq.com
  * @contact  littlezov@qq.com
- * @link     https://github.com/littlezo
- * @document https://github.com/littlezo/wiki
- * @license  https://github.com/littlezo/MozillaPublicLicense/blob/main/LICENSE
  *
+ * @see     https://github.com/littlezo
+ * @document https://github.com/littlezo/wiki
+ *
+ * @license  https://github.com/littlezo/MozillaPublicLicense/blob/main/LICENSE
  */
+
 namespace littler\WeChat\Middleware;
 
 use EasyWeChat\OfficialAccount\Application;
@@ -27,6 +30,7 @@ class OauthMiddleware
      * 执行中间件.
      *
      * @param null $param
+     *
      * @return mixed|\think\response\Redirect
      */
     public function handle(Request $request, \Closure $next, $param = null)
@@ -36,14 +40,14 @@ class OauthMiddleware
         $account = $params['account'];
         $scopes = $params['scopes'];
         //定义session
-        $session_key = 'wechat_oauth_user_' . $account;
+        $session_key = 'wechat_oauth_user_'.$account;
         $session = Session::get($session_key);
         /* @var Application $officialAccount */
         $officialAccount = app(\sprintf('wechat.official_account.%s', $account));
-        if (! $scopes) {
+        if (!$scopes) {
             $scopes = config(\sprintf('wechat.official_account.%s.oauth.scopes', $account));
         }
-        if (! $scopes) {
+        if (!$scopes) {
             $scopes = ['snsapi_base'];
         }
         if (is_string($scopes)) {
@@ -51,7 +55,7 @@ class OauthMiddleware
         }
         // dd($scopes);
         Log::info(json_encode($session));
-        if (! $session) {
+        if (!$session) {
             if ($request->get('code')) {
                 $session = $officialAccount->oauth->user();
                 Session::set($session_key, $session);
@@ -62,9 +66,11 @@ class OauthMiddleware
                 ]);
                 //跳转到登录
                 Log::info($this->getTargetUrl($request));
+
                 return redirect($this->getTargetUrl($request));
             }
             $url = $officialAccount->oauth->scopes($scopes)->redirect($request->url(true));
+
             return redirect($url);
         }
         Event::trigger('oauth', [
@@ -72,11 +78,13 @@ class OauthMiddleware
             'type' => 'official_account',
             'is_new' => false,
         ]);
+
         return $next($request);
     }
 
     /**
      * @param $params
+     *
      * @return array
      */
     protected function getParam($params)
@@ -84,7 +92,7 @@ class OauthMiddleware
         //定义初始化
         $res['account'] = 'default';
         $res['scopes'] = null;
-        if (! $params) {
+        if (!$params) {
             return $res;
         }
         //解析
@@ -107,6 +115,7 @@ class OauthMiddleware
         if ($scopes) {
             $res['scopes'] = $scopes;
         }
+
         return $res;
     }
 
@@ -115,11 +124,11 @@ class OauthMiddleware
      *
      * @param Request $request
      *¬
+     *
      * @return string
      */
     protected function getTargetUrl($request)
     {
-        dd($request);
         $param = $request->get();
         if (isset($param['code'])) {
             unset($param['code']);
@@ -127,6 +136,7 @@ class OauthMiddleware
         if (isset($param['state'])) {
             unset($param['state']);
         }
-        return $request->baseUrl() . (empty($param) ? '' : '?' . http_build_query($param));
+
+        return $request->baseUrl().(empty($param) ? '' : '?'.http_build_query($param));
     }
 }
