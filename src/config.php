@@ -6,12 +6,14 @@ declare(strict_types=1);
  * ## 何为相思：不删不聊不打扰，可否具体点：曾爱过。何为遗憾：你来我往皆过客，可否具体点：再无你。.
  *
  * @version 1.0.0
+ *
  * @author @小小只^v^ <littlezov@qq.com>  littlezov@qq.com
  * @contact  littlezov@qq.com
- * @link     https://github.com/littlezo
- * @document https://github.com/littlezo/wiki
- * @license  https://github.com/littlezo/MozillaPublicLicense/blob/main/LICENSE
  *
+ * @see     https://github.com/littlezo
+ * @document https://github.com/littlezo/wiki
+ *
+ * @license  https://github.com/littlezo/MozillaPublicLicense/blob/main/LICENSE
  */
 return [
     /*
@@ -37,7 +39,7 @@ return [
          */
         'log' => [
             'level' => env('WECHAT_LOG_LEVEL', 'debug'),
-            'file' => env('WECHAT_LOG_FILE', runtime_path() . 'log/wechat.log'),
+            'file' => env('WECHAT_LOG_FILE', runtime_path().'log/wechat.log'),
         ],
     ],
 
@@ -69,60 +71,57 @@ return [
     ],
 
     //第三方开发平台
-    //'open_platform'    => [
+    // 'open_platform'    => [
     //    'default' => [
     //        'app_id'  => env('WECHAT_OPEN_PLATFORM_APPID', ''),
     //        'secret'  => env('WECHAT_OPEN_PLATFORM_SECRET', ''),
     //        'token'   => env('WECHAT_OPEN_PLATFORM_TOKEN', ''),
     //        'aes_key' => env('WECHAT_OPEN_PLATFORM_AES_KEY', ''),
     //    ],
-    //],
-
-    //小程序
-    'mini_program' => [
-        'default' => [
-            'app_id' => env('WECHAT_MINI_PROGRAM_APPID', ''),
-            'secret' => env('WECHAT_MINI_PROGRAM_SECRET', ''),
-            'token' => env('WECHAT_MINI_PROGRAM_TOKEN', ''),
-            'aes_key' => env('WECHAT_MINI_PROGRAM_AES_KEY', ''),
-        ],
-    ],
-
+    // ],
     //支付
     'payment' => [
         'default' => [
-            'sandbox' => env('WECHAT_PAYMENT_SANDBOX', false),
-            'app_id' => env('WECHAT_PAYMENT_APPID', ''),
             'mch_id' => env('WECHAT_PAYMENT_MCH_ID', 'your-mch-id'),
-            'key' => env('WECHAT_PAYMENT_KEY', 'key-for-signature'),
-            'cert_path' => env('WECHAT_PAYMENT_CERT_PATH', 'path/to/cert/apiclient_cert.pem'),    // XXX: 绝对路径！！！！
-            'key_path' => env('WECHAT_PAYMENT_KEY_PATH', 'path/to/cert/apiclient_key.pem'),      // XXX: 绝对路径！！！！
+            'certificate' => env('WECHAT_PAYMENT_CERT_PATH', 'path/to/cert/apiclient_cert.pem'),    // XXX: 绝对路径！！！！
+            'private_key' => env('WECHAT_PAYMENT_KEY_PATH', 'path/to/cert/apiclient_key.pem'),
+            'certificate_serial_no' => '',   // XXX: 绝对路径！！！！
+            'http' => [
+                'base_uri' => 'https://api.mch.weixin.qq.com/',
+            ],
+            'secret_key' => env('WECHAT_PAYMENT_KEY', ''),
             'notify_url' => 'http://example.com/payments/wechat-notify',                           // 默认支付结果通知地址
         ],
     ],
 
+    //小程序
+    'mini_app' => [
+        'default' => [
+            'app_id' => env('WECHAT_MINI_APP_APPID', ''),
+            'secret' => env('WECHAT_MINI_APP_SECRET', ''),
+            'token' => env('WECHAT_MINI_APP_TOKEN', ''),
+            'aes_key' => env('WECHAT_MINI_APP_AES_KEY', ''),
+        ],
+    ],
+
     //企业微信
-    //'work'             => [
-    //    'default' => [
-    //        'corp_id'  => 'xxxxxxxxxxxxxxxxx',
-    //        'agent_id' => 100020,
-    //        'secret'   => env('WECHAT_WORK_AGENT_CONTACTS_SECRET', ''),
-    //    ],
-    //],
+    // 'work' => [
+    //     'default' => [
+    //         'corp_id' => '',
+    //         'token' => '',
+    //         'aes_key' => '', // 明文模式请勿填写 EncodingAESKey
+    //         'ageint_id' => 0,
+    //         'secret' => env('WECHAT_WORK_AGENT_CONTACTS_SECRET', ''),
+    //     ],
+    // ],
 
     //企业开放平台
-    //'open_work'             => [
-    //    'default' => [
-    //        //参考EasyWechat官方文档
-    //        //https://www.easywechat.com/docs/4.1/open-work/index
-    //    ],
-    //],
-
-    //小微商户
-    //'micro_merchant'   => [
-    //    'default' => [
-    //        //参考EasyWechat官方文档
-    //        //https://www.easywechat.com/docs/4.1/micro-merchant/index
-    //    ],
-    //],
+    // 'open_work' => [
+    //     'default' => [
+    //         'corp_id' => 'wx3cf0f39249eb0exx',
+    //         'provider_secret' => 'f1c242f4f28f735d4687abb469072axx',
+    //         'token' => 'easywechat',
+    //         'aes_key' => '', // 明文模式请勿填写 EncodingAESKey
+    //     ],
+    // ],
 ];
