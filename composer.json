@@ -1,40 +1,40 @@
 {
-	"name": "littler/think-wechat",
-	"description": "EasyWechat For thnkphp5.1+ or thinkphp6.0",
-	"type": "library",
-	"keywords": [
-		"wechat",
-		"weixin",
-		"easywechat",
-		"thinkphp",
-		"think",
-		"sdk"
-	],
-	"require": {
-		"php": "~8.0",
-	"overtrue/wechat": "~5.1",
-		"topthink/framework": "~6.0"
-	},
-	"license": "MIT",
-	"authors": [
-		{
-			"name": "小小只",
-			"email": "littlezo@qq.com"
-		}
-	],
-	"autoload": {
-		"psr-4": {
-			"littler\\WeChat\\": "src/"
-		}
-	},
-	"extra": {
-		"think": {
-			"services": [
-				"littler\\WeChat\\Service"
-			],
-			"config": {
-				"wechat": "src/config.php"
-			}
-		}
-	}
+    "name": "littler/think-wechat",
+    "description": "EasyWechat For thnkphp5.1+ or thinkphp6.0",
+    "type": "library",
+    "keywords": [
+        "wechat",
+        "weixin",
+        "easywechat",
+        "thinkphp",
+        "think",
+        "sdk"
+    ],
+    "require": {
+        "php": "~8.0",
+        "overtrue/wechat": "~5.1",
+        "topthink/framework": "~6.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "小小只",
+            "email": "littlezo@qq.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "littler\\WeChat\\": "src/"
+        }
+    },
+    "extra": {
+        "think": {
+            "services": [
+                "littler\\WeChat\\Service"
+            ],
+            "config": {
+                "wechat": "src/config.php"
+            }
+        }
+    }
 }
